@@ -7,12 +7,16 @@ import useLocalStorage from 'react-use-localstorage';
 import { buscaId, deleteId } from '../../../paginas/service/Service';
 import Tema from '../../../paginas/model/Tema';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokenReducer';
 
 
 function DeletarTema() {
     let navigate = useNavigate();
     const { id } = useParams<{id: string}>();
-    const [token, setToken] = useLocalStorage('token');
+     const token = useSelector<TokenState, TokenState["tokens"]>(
+        (state) => state.tokens
+      );
     const [tema, setTema] = useState<Tema>()
 
     useEffect(() => {
